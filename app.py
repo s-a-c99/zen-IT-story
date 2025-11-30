@@ -66,7 +66,7 @@ TRANSLATIONS = {
         "location_info": "e.g. Paris",
         "location_hint": "🌎 Type or select a city 📍",
         "generate_btn": "✨ Generate Tonight's Story",
-        "quick_actions": "⚡ Quick Actions",
+        "quick_actions": "⚡ Quick Actions [double click]",
         "save_btn": "💖 Save to Favorites",
         "postcard_btn": "🎨 Create Dream Canvas",
         "waiting_title": "🌙 Click \"Generate Story\" to begin",
@@ -104,7 +104,7 @@ TRANSLATIONS = {
         "location_info": "es. Roma",
         "location_hint": "🌎 Scrivi o seleziona una città 📍",
         "generate_btn": "✨ Genera la Storia di Stasera",
-        "quick_actions": "⚡ Azioni Rapide",
+        "quick_actions": "⚡ Azioni Rapide [doppio click]",
         "save_btn": "💖 Salva nei Preferiti",
         "postcard_btn": "🎨 Crea Tela dei Sogni",
         "waiting_title": "🌙 Clicca \"Genera Storia\" per iniziare",
@@ -142,7 +142,7 @@ TRANSLATIONS = {
         "location_info": "ex. Paris",
         "location_hint": "🌎 Tapez ou sélectionnez une ville 📍",
         "generate_btn": "✨ Générer l'Histoire de Ce Soir",
-        "quick_actions": "⚡ Actions Rapides",
+        "quick_actions": "⚡ Actions Rapides [double clic]",
         "save_btn": "💖 Sauvegarder",
         "postcard_btn": "🎨 Créer Toile de Rêves",
         "waiting_title": "🌙 Cliquez sur \"Générer Histoire\" pour commencer",
@@ -180,7 +180,7 @@ TRANSLATIONS = {
         "location_info": "ej. Madrid",
         "location_hint": "🌎 Escribe o selecciona una ciudad 📍",
         "generate_btn": "✨ Generar Historia de Esta Noche",
-        "quick_actions": "⚡ Acciones Rápidas",
+        "quick_actions": "⚡ Acciones Rápidas [doble clic]",
         "save_btn": "💖 Guardar",
         "postcard_btn": "🎨 Crear Lienzo de Sueños",
         "waiting_title": "🌙 Haz clic en \"Generar Historia\" para comenzar",
@@ -1886,7 +1886,7 @@ def build_ui():
                         
                         gr.Markdown(f"### {TRANSLATIONS['en']['quick_actions']}")
 
-                        save_btn = gr.Button(TRANSLATIONS["en"]["save_btn"], elem_classes="save-btn")
+                        save_btn = gr.Button(TRANSLATIONS["en"]["save_btn"], elem_classes="save-btn", visible=False)
                         postcard_btn = gr.Button(TRANSLATIONS["en"]["postcard_btn"], elem_classes="postcard-btn")
                         status_msg = gr.HTML("", visible=False, elem_classes="status-message")
 
@@ -2225,7 +2225,8 @@ def build_ui():
                 updated_postcards
             ] + canvas_slot_updates + [
                 gr.update(value=postcard_img, visible=True if postcard_img else False),
-                gr.update(value=msg_html, visible=True)
+                gr.update(value=msg_html, visible=True),
+                gr.update(visible=True)  # Show save_btn after Dream Canvas created
             ]
 
         def delete_story_handler(index, saved, lang):
@@ -2358,7 +2359,7 @@ def build_ui():
         postcard_btn.click(
             fn=create_postcard_handler,
             inputs=[current_story, current_image, current_location, current_language, postcards_state],
-            outputs=[postcards_state] + canvas_slot_outputs + [postcard_preview, status_msg]
+            outputs=[postcards_state] + canvas_slot_outputs + [postcard_preview, status_msg, save_btn]
         )
 
         # Connect individual ❌ delete buttons for Saved Stories
