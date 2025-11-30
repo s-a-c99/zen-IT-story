@@ -16,7 +16,7 @@
 ## 🎥 Demo Video
 
 **Watch zen-IT story in action:**
-- [Hugging Face](https://huggingface.co/spaces/MCP-1st-Birthday/zen-IT-story/blob/main/README.md)
+- [🤗Hugging Face](https://huggingface.co/spaces/MCP-1st-Birthday/zen-IT-story/blob/main/README.md)
 
 
 ---
