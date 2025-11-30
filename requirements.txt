@@ -1,0 +1,29 @@
+# Zen-IT-Story - Python Dependencies
+
+# Core framework
+gradio==6.0.0.dev4  # MCP support requires Gradio 6+ (using dev version until stable release)
+
+# LLM APIs
+google-generativeai>=0.3.0  # Gemini API (PRIMARY)
+
+# Astronomy APIs
+requests>=2.31.0  # For HTTP requests to APIs
+python-dateutil>=2.8.0  # Date parsing
+pytz>=2023.3  # Timezone handling
+
+# Text processing
+syllables>=1.0.8  # Haiku syllable counting
+
+# Image processing (for postcard generation)
+Pillow>=9.0.0  # Image creation and manipulation
+
+# Astronomy calculations (NEW - FASE 1)
+skyfield>=1.53  # Real-time star visibility calculation
+pandas>=2.0.0  # Required by skyfield for Hipparcos catalog
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Optional (for future features)
+# supabase>=2.0.0  # Database (notifications)
+# sendgrid>=6.10.0  # Email notifications
