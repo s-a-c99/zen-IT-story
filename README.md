@@ -1,179 +1,130 @@
+---
+title: Zen IT Story
+emoji: 🌖
+colorFrom: blue
+colorTo: purple
+sdk: gradio
+sdk_version: 6.0.1
+app_file: app.py
+pinned: false
+license: mit
+short_description: MCP-powered bedtime astronomy stories for families
+tags:
+- building-mcp-track-customer
+- building-mcp-track-creative
+- mcp-in-action-track-consumer
+- mcp-in-action-track-creative
+---
+
+
 # 🌌 Zen-IT Story 🔭
 
-**AI-powered bedtime astronomy tales for families**
+**Transform the night sky into magical bedtime stories combining real astronomy, AI narratives, and haiku poetry**
 
-[![MCP Hackathon](https://img.shields.io/badge/MCP-Hackathon%202025-blue)](https://huggingface.co/MCP-1st-Birthday)
 [![Gradio](https://img.shields.io/badge/Gradio-6.0-orange)](https://gradio.app)
 [![Gemini](https://img.shields.io/badge/Google-Gemini%20AI-green)](https://ai.google.dev)
 [![License](https://img.shields.io/badge/license-MIT-purple)](LICENSE)
+[![MCP Hackathon](https://img.shields.io/badge/MCP-Hackathon%202025-blue)](https://huggingface.co/MCP-1st-Birthday)
 
-> Transform the night sky into personalized bedtime stories combining real astronomical data, AI-generated narratives, and haiku poetry. Educational, magical, and perfect for curious young minds! ✨
+> Every night, a new star. Every star, a new story. Perfect for curious young minds aged 2-8 and their families! ✨
+
+---
+
+## 🎥 Demo Video
+
+**Watch Zen-IT Story in action:**
+
+[![Demo Video](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+
+[▶️ Watch full demo on YouTube](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+
+---
+
+## 📱 Social Media
+
+**Follow the launch:**
+- [🐦 Twitter/X Announcement](https://x.com/YOUR_HANDLE/status/TWEET_ID)
 
 ---
 
 ## 🎯 What is Zen-IT Story?
 
-Zen-IT Story is an **educational-creative web application** that turns celestial objects visible in your night sky into personalized bedtime stories for children (ages 2-8) and their families.
+An **educational-creative web application** that turns celestial objects visible in your night sky into personalized bedtime stories.
 
-**Every night is a new adventure** based on real astronomy:
-- 🌍 **Real-time astronomy**: Uses your location to find visible planets, stars, and constellations
-- 🤖 **AI storytelling**: Google Gemini generates unique, child-safe narratives
-- 🎨 **Beautiful imagery**: Real photos from Hubble, SDSS, and NASA archives
-- 📖 **Haiku poetry**: Each story ends with a contemplative haiku
-- 🌐 **Multi-language**: English, Italian, French, Spanish
-- 📱 **Mobile-first**: Responsive design perfect for bedtime reading
+### ✨ Key Features
 
----
-
-## ✨ Features
-
-### 🌟 Core Features
-- **Intelligent Object Selection**: MCP-powered agent chooses the most interesting celestial object for your location
-- **Safe Content**: Triple-layer safety filters ensure 100% child-appropriate stories
-- **Multi-language Support**: Stories and UI in 4 languages
-- **Social Sharing**: WhatsApp, Email, X (Twitter), Facebook, Instagram, Telegram
-- **Bookmarking**: Save favorite stories locally
-- **Print/PDF**: Download stories as beautiful PDFs
-- **Dark/Light Mode**: Night-friendly dark mode (default) or daytime light mode
-
-### 🎨 Enhanced Features
-- **"Did You Know?" Facts**: Educational astronomy facts with each story
-- **Astronomy Dictionary**: Simple definitions for scientific terms
-- **Instagram Stories Format**: Share as vertical 9:16 image
-- **Create Postcard**: Combined image + text JPG for easy sharing
-- **Error Messages**: Even errors are poetic and child-friendly!
-- **Beautiful Typography**: Fredoka One font for a warm, playful feel
+🌍 **Real-time Astronomy** → Uses your location to find visible planets and stars tonight  
+🤖 **AI Storytelling** → Google Gemini generates unique, child-safe narratives  
+🎨 **Beautiful Imagery** → Real photos from Hubble, SDSS, and NASA archives  
+📖 **Haiku Poetry** → Each story ends with a contemplative haiku  
+🌐 **Multi-language** → English, Italian, French, Spanish  
+🎨 **Dream Canvas** → Printable activity template for kids to draw their dreams  
+💾 **Save & Share** → Bookmark stories and share on social media
 
 ---
 
-## 🏗️ Architecture
+## 🔮 How It Works
+
+The app combines **real astronomical data** with **AI creativity**:
+
+### 1. **Location-Based Star Selection** (MCP + Skyfield)
+- Enter your city (or use auto-geolocation)
+- MCP agent calculates visible celestial objects using Skyfield library
+- Selects the most interesting star/planet for tonight's story
+
+### 2. **Story Generation** (Google Gemini 1.5)
+- Generates age-appropriate narrative (2-8 years old)
+- Follows 4-act structure inspired by Japanese storytelling
+- Triple-layer safety filtering ensures 100% child-appropriate content
+
+### 3. **Real Astronomical Images** (Multi-API Strategy)
+- **Priority 1**: Curated star images (Wikimedia/ESO/NASA)
+- **Priority 2**: NASA SkyView (uses RA/Dec coordinates)
+- **Priority 3**: SDSS + SkyServer (real coordinates from Skyfield)
+- **Priority 4**: Hubble Heritage Archive (search by name)
+- **Priority 5**: NASA Images API (search by name)
+
+### 4. **Enhanced Features**
+- Haiku poetry generation (5-7-5 syllables for Italian, flexible for others)
+- "Did You Know?" astronomy facts
+- Printable Dream Canvas for kids to draw
+- Astronomy Dictionary with 18 terms
+- Dark/Light mode toggle
+
+---
+
+## 🏗️ Technical Architecture
 
 ### Track 1: MCP Server (Building MCP)
 
+The app includes an **MCP-compatible server** that exposes astronomy tools:
+
+```python
+# MCP Tools exposed via Gradio 6
+- select_celestial(lat, lon, date) → Returns best object for location
+- get_story_prompt(object, location) → Generates Gemini prompt
+- generate_image_prompt(object) → Creates image search query
 ```
-┌─────────────────────────┐
-│   MCP Server            │
-│  (Gradio 6 + Python)    │
-├─────────────────────────┤
-│                         │
-│  Tools:                 │
-│  • select_celestial()   │
-│  • get_story_prompt()   │
-│  • generate_image_prompt│
-│                         │
-│  APIs:                  │
-│  • Visible Planets v3   │
-│  • Arcsecond.io         │
-│  • Hubble Heritage      │
-└─────────────────────────┘
+
+**Data Flow**:
+```
+User Location → MCP Server → Skyfield Calculation
+    ↓
+Visible Stars/Planets (Top 10 by magnitude)
+    ↓
+MCP Agent Selects Best Object
+    ↓
+Gemini API generates story → Image APIs fetch photo
 ```
 
 ### Track 2: Gradio UI (MCP in Action)
 
-```
-┌──────────────────────────────────┐
-│   Gradio ChatInterface           │
-│   (User-facing application)      │
-├──────────────────────────────────┤
-│                                  │
-│  Components:                     │
-│  • Location Selector (1000+ cities)
-│  • Language Switcher (4 langs)  │
-│  • Story Generator (Gemini AI)  │
-│  • Image Fetcher (3-tier fallback)│
-│  • Social Sharing Buttons        │
-│  • Bookmark System               │
-│  • Print/PDF Export              │
-│                                  │
-│  Integrations:                   │
-│  • MCP Client → MCP Server       │
-│  • Google Gemini API             │
-│  • Astronomy APIs                │
-└──────────────────────────────────┘
-```
-
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Python 3.10+
-- Google Gemini API key ([Get one free](https://aistudio.google.com/app/apikey))
-
-### Installation
-
-```bash
-# Clone repository
-git clone https://github.com/s-a-c99/Zen-IT-Story.git
-cd Zen-IT-Story
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Setup environment
-cp .env.example .env
-# Edit .env and add your GEMINI_API_KEY
-```
-
-### Run Locally
-
-**Option 1: Full UI (recommended)**
-```bash
-python src/app.py
-```
-Open http://localhost:7860
-
-**Option 2: MCP Server only**
-```bash
-python src/mcp_server.py
-```
-Connect with Claude Desktop or other MCP clients.
-
----
-
-## 📖 Story Format
-
-Each story follows a structured 4-act format inspired by Japanese storytelling:
-
-### Act I - The Encounter (2-3 sentences)
-The child meets the celestial object as it begins to speak
-
-### Act II - The Message (4-6 sentences)
-The star/planet shares observations about Earth and humanity
-
-### Act III - The Promise (2-4 sentences)
-A closing message of hope and wonder
-
-### Act IV - Haiku (3 lines)
-A contemplative poem capturing the essence (5-7-5 syllables for Italian, flexible for other languages)
-
-**Example (English):**
-
-> **The Promise of Altair**
->
-> Above the sleeping city, the summer wind carries whispers.
-> A bright blue light shimmers stronger than the others.
-> It is Altair, the star of the celestial river.
->
-> "Good evening, little human," her voice hums in the darkness.
-> "Every night I watch over your planet of water and dreams.
-> From up here I see oceans breathing, mountains moving,
-> and millions of hearts beating together, even when they don't realize it."
->
-> The child listens, eyes closed, with a slow smile.
-> "Altair," asks softly, "are you lonely up there?"
->
-> "Never," responds the star, "because the Earth sings.
-> Every laugh, every hug, every story you tell
-> reaches me like a little spark of life."
->
-> Altair shines brighter, and the sky feels closer.
->
-> **Haiku of Altair**
-> Blue above the sea —
-> I hear the human heartbeat,
-> cradle of light.
+Beautiful **Gradio 6.0 interface** with:
+- Autocomplete city selector (60+ popular cities)
+- Streaming MCP activity logs
+- Multi-tab navigation (Generate, Saved Stories, Dream Canvas, Dictionary, About)
+- Responsive mobile-first design
+- Custom CSS with animated starry background
 
 ---
 
@@ -181,151 +132,205 @@ A contemplative poem capturing the essence (5-7-5 syllables for Italian, flexibl
 
 | Component | Technology | Purpose |
 |-----------|------------|---------|
-| **LLM** | Google Gemini 1.5 Pro | Story generation |
-| **Framework** | Gradio 6 | UI + MCP server |
-| **Protocol** | Model Context Protocol (MCP) | Agent orchestration |
-| **APIs** | Visible Planets, Arcsecond, Hubble | Astronomy data |
-| **Languages** | Python 3.10+ | Backend |
-| **Styling** | Custom CSS + Fredoka One font | UI design |
-| **Safety** | Multi-layer content filters | Child protection |
+| **AI Model** | Google Gemini 1.5 Pro | Story generation with safety filters |
+| **Framework** | Gradio 6.0 | UI + MCP server capabilities |
+| **Protocol** | Model Context Protocol | Agent orchestration |
+| **Astronomy** | Skyfield | Real-time star visibility calculations |
+| **APIs** | Visible Planets, Arcsecond, Hubble, NASA | Astronomical data and images |
+| **Languages** | Python 3.10+ | Backend logic |
+| **Styling** | Custom CSS + Fredoka font | Child-friendly design |
+
+---
+
+## 🚀 Quick Start
+
+### Run Locally
+
+```bash
+# Clone repository
+git clone https://huggingface.co/spaces/MCP-1st-Birthday/zen-it-story
+cd zen-it-story
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Setup environment
+cp .env.example .env
+# Add your GEMINI_API_KEY to .env
+
+# Run app
+python app.py
+```
+
+Open http://localhost:7860
+
+### API Key
+
+Get a **free** Google Gemini API key:  
+👉 [Google AI Studio](https://aistudio.google.com/app/apikey)
+
+---
+
+## 📖 Story Format
+
+Each story follows a **4-act structure**:
+
+### Act I - The Encounter (2-3 sentences)
+Child meets the celestial object as it begins to speak
+
+### Act II - The Message (4-6 sentences)
+Star/planet shares observations about Earth and humanity
+
+### Act III - The Promise (2-4 sentences)
+Closing message of hope and wonder
+
+### Act IV - Haiku (3 lines)
+Contemplative poem capturing the essence
+
+**Example** (English):
+
+> **The Promise of Altair**
+>
+> Above the sleeping city, the summer wind carries whispers.  
+> A bright blue light shimmers stronger than the others.  
+> It is Altair, the star of the celestial river.
+>
+> "Good evening, little human," her voice hums in the darkness.  
+> "Every night I watch over your planet of water and dreams..."
+>
+> **Haiku of Altair**  
+> *Blue above the sea —*  
+> *I hear the human heartbeat,*  
+> *cradle of light.*
+
+---
+
+## 🌍 Supported Languages
+
+| Language | Code | UI | Stories | Haiku | Dictionary |
+|----------|------|----|---------| ------|------------|
+| English | `en` | ✅ | ✅ | ✅ | ✅ (18 terms) |
+| Italian | `it` | ✅ | ✅ | ✅ (5-7-5) | ✅ (18 terms) |
+| French | `fr` | ✅ | ✅ | ✅ | ✅ (18 terms) |
+| Spanish | `es` | ✅ | ✅ | ✅ | ✅ (18 terms) |
+
+---
+
+## 🎨 Design Philosophy
+
+### For Children (Ages 2-8)
+- **Simple language**: No complex jargon, warm and calm tone
+- **Visual beauty**: Real space imagery (not AI-generated)
+- **Safety first**: Triple-layer content filtering
+- **Interactive**: Printable Dream Canvas to draw their dreams
+
+### For Parents
+- **Educational**: Real scientific facts woven into narratives
+- **Convenient**: Works on any device, mobile-responsive
+- **Shareable**: Easy social media export
+- **Trustworthy**: Open source, transparent AI usage
+
+### For Educators
+- **Multilingual**: Expand reach across cultures
+- **Accurate astronomy**: NASA/ESA data sources
+- **STEM Gateway**: Stories spark interest in science
+
+---
+
+## 🏆 MCP Hackathon Submission
+
+Built for **MCP's 1st Birthday Hackathon** (Nov 14-30, 2025)
+
+### Submission Tracks
+- **Track 1: Building MCP** - Consumer category
+- **Track 2: MCP in Action** - Creative category
+
+### Why This Project Stands Out
+
+✅ **Completeness** → Full MCP server + Gradio UI + comprehensive docs  
+✅ **Design/UI-UX** → Mobile-responsive, polished, child-friendly  
+✅ **Functionality** → Multi-API integration, real astronomy, AI safety  
+✅ **Creativity** → Unique concept: astronomy + storytelling + poetry  
+✅ **Real-World Impact** → Educational value for families worldwide  
+✅ **Documentation** → Clear README, inline code comments, guides  
 
 ---
 
 ## 📁 Project Structure
 
 ```
-Zen-IT-Story/
-├── src/                      # Source code
-│   ├── app.py                # Main Gradio UI
-│   ├── mcp_server.py         # MCP Server (Track 1)
+zen-it-story/
+├── app.py                    # Main Gradio UI (MCP-enabled)
+├── src/
+│   ├── __init__.py
+│   ├── mcp_server.py         # MCP server tools
 │   ├── story_generator.py    # Gemini AI integration
-│   ├── astronomy_api.py      # API integrations
-│   ├── image_fetcher.py      # Image retrieval
-│   └── config.py             # Configuration & settings
-├── tests/                    # Test suites
-│   ├── test_story_generator.py
-│   └── test_astronomy_api.py
-├── docs/                     # Documentation
-│   ├── deployment/           # Deployment guides
-│   ├── agents/               # Agent completion reports
-│   ├── technical/            # Technical documentation
-│   └── planning/             # Project planning
-├── assets/                   # Static resources
-│   └── custom.css            # UI styling
-├── .env.example              # Environment template
+│   ├── astronomy_api.py      # Skyfield + API integrations
+│   ├── image_fetcher.py      # Multi-source image retrieval
+│   └── config.py             # Configuration & constants
 ├── requirements.txt          # Python dependencies
+├── .env.example              # Environment template
 └── README.md                 # This file
 ```
 
 ---
 
-## 🎨 Design Philosophy
-
-### For Children
-- **Simple language**: No complex astronomical jargon
-- **Warm tone**: Calm, affectionate, contemplative
-- **Visual beauty**: Real space imagery (not AI-generated)
-- **Safety first**: Triple-layer content filtering
-
-### For Parents
-- **Educational**: Real scientific facts woven into narratives
-- **Convenient**: Works on any device, mobile-first
-- **Shareable**: Easy export to social media
-- **Trustworthy**: Open source, transparent content generation
-
-### For Educators
-- **Multilingual**: Expand reach across cultures
-- **Accurate astronomy**: Real data from NASA and scientific databases
-- **Engagement**: Stories as gateway to STEM learning
-
----
-
-## 🌍 Supported Languages
-
-| Language | Code | UI | Stories | Haiku |
-|----------|------|----|---------| ------|
-| English | `en` | ✅ | ✅ | ✅ (flexible) |
-| Italian | `it` | ✅ | ✅ | ✅ (5-7-5 strict) |
-| French | `fr` | ✅ | ✅ | ✅ (flexible) |
-| Spanish | `es` | ✅ | ✅ | ✅ (flexible) |
-
-*More languages coming post-hackathon!*
-
----
-
-## 🏆 MCP Hackathon Submission
-
-This project was built for the **MCP's 1st Birthday Hackathon** (Nov 14-30, 2025) hosted by Anthropic and Gradio.
-
-### Tracks
-- **Track 1**: Building MCP - Consumer category
-- **Track 2**: MCP in Action - Creative category
-
-### Tags
-- `building-mcp-track-consumer`
-- `mcp-in-action-track-creative`
-
-### Judging Criteria
-- ✅ **Completeness**: Full MCP server + Gradio UI + comprehensive docs
-- ✅ **Design/UI-UX**: Mobile-responsive, child-friendly, polished
-- ✅ **Functionality**: Gemini AI + MCP + multi-language + safety
-- ✅ **Creativity**: Unique concept combining astronomy, storytelling, and poetry
-- ✅ **Documentation**: 30+ pages of guides, reports, and technical docs
-- ✅ **Real-World Impact**: Educational value for families worldwide
-
----
-
 ## 🤝 Contributing
 
-Contributions are welcome post-hackathon! Areas for improvement:
+Post-hackathon contributions welcome! Ideas:
 
-- Additional languages (German, Portuguese, Japanese, Arabic, etc.)
-- More astronomical data sources
-- Audio narration (ElevenLabs integration)
-- Offline PWA support
-- Community story gallery
-- Teacher dashboard for classroom use
-
-See [`docs/planning/FUTURE_IMPLEMENTATIONS.md`](docs/planning/FUTURE_IMPLEMENTATIONS.md) for full roadmap.
+- 🌍 More languages (German, Portuguese, Japanese, Arabic)
+- 🔊 Audio narration (ElevenLabs TTS)
+- 📱 Progressive Web App (offline support)
+- 🏫 Teacher dashboard for classroom use
+- 🌟 Community story gallery
+- 🎮 Interactive constellation games
 
 ---
 
 ## 📜 License
 
-MIT License - See [LICENSE](LICENSE) file for details.
+**MIT License** - See [LICENSE](LICENSE) file
+
+Free to use, modify, and distribute with attribution.
 
 ---
 
 ## 🙏 Acknowledgments
 
 - **Anthropic & Gradio**: For hosting the MCP Hackathon
-- **Google Gemini**: For providing the AI backbone (and sponsoring!)
-- **NASA & Hubble Heritage**: For beautiful, free astronomy imagery
-- **Arcsecond.io & Visible Planets**: For accessible astronomy APIs
-- **Open source community**: For the amazing tools that made this possible
+- **Google Gemini**: For AI capabilities and sponsorship
+- **NASA, ESA, Hubble Heritage**: For stunning, free imagery
+- **Arcsecond.io & Visible Planets API**: For accessible astronomy data
+- **Open source community**: For the amazing tools
 
 ---
 
-## 📞 Contact & Links
+## 🔗 Links
 
-- **Demo**: [Coming soon - HuggingFace Space]
-- **Video**: [Coming soon - YouTube demo]
-- **Hackathon**: https://huggingface.co/MCP-1st-Birthday
-- **Issues**: https://github.com/s-a-c99/Zen-IT-Story/issues
+- **GitHub Repository**: [https://github.com/s-a-c99/zen-it-story](https://github.com/s-a-c99/zen-it-story)
+- **Live Demo**: [This Space!](https://huggingface.co/spaces/MCP-1st-Birthday/zen-it-story)
+- **Demo Video**: [YouTube Link](https://www.youtube.com/watch?v=YOUR_VIDEO_ID)
+- **Social Media**: [Twitter/X Thread](https://x.com/YOUR_HANDLE/status/TWEET_ID)
+- **MCP Hackathon**: [https://huggingface.co/MCP-1st-Birthday](https://huggingface.co/MCP-1st-Birthday)
 
 ---
 
 ## 🌙 Philosophy
 
-> "We are all made of star stuff" - Carl Sagan
+> *"We are all made of star stuff"* — Carl Sagan
 
-Zen-IT Story believes that astronomy is not just science—it's wonder, poetry, and connection. Every child who looks up at the stars is asking the same question humanity has asked for millennia: *What's out there?*
+Zen-IT Story believes astronomy is not just science—it's **wonder, poetry, and connection**. Every child who looks up at the stars asks: *What's out there?*
 
-Our answer is a bedtime story. Because wonder should be gentle, knowledge should be joyful, and every night sky deserves to be celebrated.
+Our answer is a bedtime story.
+
+Because **wonder should be gentle**, **knowledge should be joyful**, and every night sky deserves to be celebrated.
+
+---
 
 **Sweet dreams and clear skies!** ✨🌟🌙
 
 ---
 
-*Built with ❤️ for families who love the stars*
-*November 2025 | MCP Hackathon Submission*
+*Built with ❤️ for families who love the stars*  
+*November 2025 | MCP 1st Birthday Hackathon Submission*
