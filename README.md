@@ -2,7 +2,7 @@
 title: Zen IT Story
 emoji: 🌖
 colorFrom: blue
-colorTo: pink
+colorTo: purple
 sdk: gradio
 sdk_version: 6.0.1
 app_file: app.py
@@ -16,23 +16,6 @@ tags:
 - mcp-in-action-track-creative
 ---
 
----
-title: Zen-IT Story
-emoji: 🔭
-colorFrom: blue
-colorTo: purple
-sdk: gradio
-sdk_version: 6.0.0
-app_file: app.py
-pinned: false
-license: mit
-short_description: AI-powered bedtime astronomy stories for families
-tags:
-  - building-mcp-track-consumer
-  - building-mcp-track-creative
-  - mcp-in-action-track-consumer
-  - mcp-in-action-track-creative
----
 
 # 🌌 Zen-IT Story 🔭
 
