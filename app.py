@@ -1916,7 +1916,7 @@ def build_ui():
                             </div>
                         """)
 
-                        with gr.Accordion(TRANSLATIONS["en"]["story_accordion"], open=True, visible=False) as story_accordion:
+                        with gr.Accordion(TRANSLATIONS["en"]["story_accordion"], open=False, visible=True) as story_accordion:
                             story_image = gr.Image(show_label=False, elem_classes="story-image")
                             story_display = gr.HTML(elem_classes="story-content")
             
@@ -2087,7 +2087,7 @@ def build_ui():
                 yield [
                     "⚠️ Please enter a location to generate a story.",
                     waiting_html,
-                    gr.update(visible=False),
+                    gr.update(open=False),
                     None,
                     "",
                     "",
@@ -2111,7 +2111,7 @@ def build_ui():
                     yield [
                         logs_text,
                         error_html,
-                        gr.update(visible=False),
+                        gr.update(open=False),
                         None,
                         "",
                         "",
@@ -2126,7 +2126,7 @@ def build_ui():
                     yield [
                         logs_text,
                         "",  # Clear waiting message
-                        gr.update(visible=True, open=True),
+                        gr.update(open=True),
                         image_url,
                         story_md,
                         story_md,
@@ -2146,7 +2146,7 @@ def build_ui():
                     yield [
                         logs_text,
                         waiting_html,
-                        gr.update(visible=False),
+                        gr.update(open=False),
                         None,
                         "",
                         "",
