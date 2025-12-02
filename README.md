@@ -428,7 +428,6 @@ Free to use, modify, and distribute with attribution.
 
 ## 🔗 Links
 
-- **GitHub Repository**: [https://github.com/s-a-c99/zen-it-story](https://github.com/s-a-c99/zen-it-story)
 - **Social Media**: [X Thread](https://x.com/s_a_c99/status/1995255819600867538?s=20)
 - **MCP Hackathon**: [https://huggingface.co/MCP-1st-Birthday](https://huggingface.co/MCP-1st-Birthday)
 
@@ -452,9 +451,4 @@ Because **wonder should be gentle**, **knowledge should be joyful**, and every n
 
 
 *Built with ❤️ for families who love the stars*  
-*November 2025 | MCP 1st Birthday Hackathon Submission*
 
----
-
-*Built with ❤️ for families who love the stars*  
-*November 2025 | MCP 1st Birthday Hackathon Submission*
